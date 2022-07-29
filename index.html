@@ -107,9 +107,18 @@
         <a id="scroll-down" href="#"></a>
     </section> -->
     <!-- HERO -->
-    <div id="images" style="position:fixed;">
-        <img class="sequencer" src="files/uploads/coverSequence/0.jpg">
+    <div id = "sequenceWrapper" style ="display: block; width:100%; height:2000px">
+    <div id="images" style="
+                    position:fixed;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden">
+        <img class="sequencer" src="files/uploads/coverSequence/0.jpg" style="flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%">
     </div> 
+    </div>
     <div class="image-container text-burn">
         <div class="burnOverlay" id="landingTitle" style="position:fixed;vertical-align: top">
             <h1 style="font-family: ShapeyFont;"><b>emoto</b></h1>
@@ -383,24 +392,28 @@
         var distanceBetween = distanceToVideo - scrollPos;
         
         if(scrollPos < distanceToVideo){//if we haven't reached the video yet, at the start of the site
-            if(distanceBetween < 50){//if we're super close to the video
+            if(distanceBetween < 300){//if we're super close to the video
                 $('.burnOverlay').css('visibility','visible');
                 $('.fullVideoWrapper').css('visibility','visible');
-                $('.fullVideoWrapper').css({'opacity' : (50-distanceBetween)/50});
+                $('.fullVideoWrapper').css({'opacity' : (200-distanceBetween)/300});
+                $('#sequenceWrapper').css({'opacity' : (distanceBetween-100)/200});
             }else{
-                $('#images').css('visibility','visible');
+                $('#sequenceWrapper').css('visibility','visible');
                 $('.fullVideoWrapper').css('visibility','hidden');
                 if(scrollPos<400){//fade title
                     $('.image-container').css({'opacity' : 1});
                     $('#landingTitle').css({'opacity' : 1-(scrollPos/300)});
                     $('#secondTitle').css({'opacity' : (scrollPos-300)/100});
-                }else if(distanceBetween <300){//add phone to ai sidekick
+                }else if(scrollPos > 1800){//add phone to ai sidekick
                     $('#secondTitle').html('<h2 style="text-align:left;padding-left:16vw;"><b>From phone,<br>&nbsp;&nbsp;&nbsp;&nbsp;to AI sidekick.</b></h2>');
+                    if(distanceBetween < 900){
+                        $('#secondTitle').css({'opacity' : (distanceBetween-200)/700});
+                    }
                 }
             }
         }else{//otherwise scroll lander is out of the picture
             $('.fullVideoWrapper').css({'opacity' : 1,'position': 'sticky', 'top': '0px'});
-            $('#images').css('visibility','hidden');
+            $('#sequenceWrapper').css({'opacity': 0});
             $('.image-container').css({'opacity' : 0});
             $('#secondTitle').css({'opacity' : 0});
         }
