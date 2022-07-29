@@ -322,6 +322,7 @@ object, video {
 	display: inline-block;
 	margin:0;
     vertical-align:top;
+    border-radius: 15px;
 }
 /*TBD to Be ZChEcKED idk*/	
 /*img, object, video {
